@@ -1,0 +1,66 @@
+name: devicelocunlock
+description: "Device Lock/Unlock System for Micro-Finance"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Firebase packages
+  firebase_core: ^2.15.0
+  firebase_messaging: ^14.6.5
+
+  # UI & Utilities
+  cupertino_icons: ^1.0.8
+  provider: ^6.0.5
+
+  # Storage
+  shared_preferences: ^2.2.1
+  flutter_secure_storage: ^9.0.0
+  http: ^1.6.0
+  image_picker: ^1.2.3
+  flutter_screenutil: ^5.9.3
+  http_parser: ^4.1.2
+  intl: ^0.20.3
+  url_launcher: ^6.3.2
+  dropdown_button2: ^3.1.0
+  video_player: ^2.8.3
+  webview_flutter: ^4.4.2
+  mobile_scanner: ^5.2.2
+  qr_flutter: ^4.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+  #  key — flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/icon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/icons/icon.png"
+  remove_alpha_ios: true
+  min_sdk_android: 21
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/
+    - assets/icons/

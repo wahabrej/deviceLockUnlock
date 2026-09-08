@@ -1,0 +1,4436 @@
+{
+  "info": {
+    "name": "Flixoo Mobile API",
+    "description": "Flixoo mobile API. Set collection variables: base_url, api_key, token, user_id. All requests require the apiKey header; authenticated requests also need a Bearer token from /login.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication & Account",
+      "item": [
+        {
+          "name": "POST /signup/send-otp",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/signup/send-otp",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "signup",
+                "send-otp"
+              ]
+            },
+            "description": "Send a 6-digit registration OTP to a phone number.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "phone",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; with country code, e.g. +8801700000000"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/signup/send-otp",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "signup",
+                    "send-otp"
+                  ]
+                },
+                "description": "Send a 6-digit registration OTP to a phone number.",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "phone",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; with country code, e.g. +8801700000000"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"code\": 200, \"status\": \"success\",\n  \"message\": \"OTP sent successfully\", \"data\": null\n}\nIf SMS is not configured:\n{\n  \"code\": 422, \"status\": \"error\",\n  \"message\": \"SMS isn't available right now. Please try again later.\", \"data\": []\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /signup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/signup",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "signup"
+              ]
+            },
+            "description": "Create the account after OTP verification and return an auth token.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "first_name",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                },
+                {
+                  "key": "last_name",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                },
+                {
+                  "key": "phone",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; same number the OTP was sent to"
+                },
+                {
+                  "key": "otp",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; 6 digits"
+                },
+                {
+                  "key": "password",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; min 8 characters"
+                },
+                {
+                  "key": "confirm_password",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; must match password"
+                },
+                {
+                  "key": "user_type",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; send \"user\""
+                },
+                {
+                  "key": "email",
+                  "value": "",
+                  "type": "text",
+                  "description": "No; placeholder generated if omitted"
+                },
+                {
+                  "key": "username",
+                  "value": "",
+                  "type": "text",
+                  "description": "No"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/signup",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "signup"
+                  ]
+                },
+                "description": "Create the account after OTP verification and return an auth token.",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "first_name",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; same number the OTP was sent to"
+                    },
+                    {
+                      "key": "otp",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; 6 digits"
+                    },
+                    {
+                      "key": "password",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; min 8 characters"
+                    },
+                    {
+                      "key": "confirm_password",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; must match password"
+                    },
+                    {
+                      "key": "user_type",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; send \"user\""
+                    },
+                    {
+                      "key": "email",
+                      "value": "",
+                      "type": "text",
+                      "description": "No; placeholder generated if omitted"
+                    },
+                    {
+                      "key": "username",
+                      "value": "",
+                      "type": "text",
+                      "description": "No"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"code\": 200, \"status\": \"success\", \"message\": \"Sign Up successful\",\n  \"data\": {\n    \"token\": \"3|f59XkGjI0r3T6JONCrssohYfRcRE0tRuvzW8iBaVa6fa4dcb\",\n    \"type\": \"Bearer\",\n    \"user\": {\n      \"first_name\": \"New\", \"last_name\": \"Member\",\n      \"phone\": \"+8801800000000\", \"email\": \"phone.e48w5hi57i@phone.local\",\n      \"status\": 1, \"client_id\": 2, \"user_type\": \"user\", \"id\": 3\n    }\n  }\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            },
+            "description": "Password login by phone or email. Rate-limited to 3 attempts/min per IP.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "phone",
+                  "value": "",
+                  "type": "text",
+                  "description": "one of phone/email; with country code"
+                },
+                {
+                  "key": "email",
+                  "value": "",
+                  "type": "text",
+                  "description": "one of phone/email; used when phone is not sent"
+                },
+                {
+                  "key": "password",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                },
+                "description": "Password login by phone or email. Rate-limited to 3 attempts/min per IP.",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "phone",
+                      "value": "",
+                      "type": "text",
+                      "description": "one of phone/email; with country code"
+                    },
+                    {
+                      "key": "email",
+                      "value": "",
+                      "type": "text",
+                      "description": "one of phone/email; used when phone is not sent"
+                    },
+                    {
+                      "key": "password",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"code\": 200, \"status\": \"success\", \"message\": \"Login successful\",\n  \"data\": {\n    \"token\": \"4|kMYmXG0r9PLTPhqY2OQeZOg9ZfeLLq4bbQGO4HUt02aac180\",\n    \"type\": \"Bearer\",\n    \"user\": {\n      \"id\": 2, \"email\": \"testuser@flixoo.test\",\n      \"first_name\": \"Test\", \"last_name\": \"User\",\n      \"phone\": \"+8801700000000\",\n      \"phone_verified_at\": \"2026-06-10T05:05:34.000000Z\",\n      \"user_type\": \"user\", \"status\": 1, \"client_id\": 1\n    }\n  }\n}\nWrong password/unknown user -> 401 \"Invalid credentials\".\nMore than 3 attempts/min -> 429 \"Too Many Attempts.\".",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /phone-login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/phone-login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "phone-login"
+              ]
+            },
+            "description": "Send a login OTP to an existing user's phone (passwordless step 1).",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "phone",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; must belong to an existing account"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /otp-verify",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/otp-verify",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "otp-verify"
+              ]
+            },
+            "description": "Verify a login OTP and return a token (passwordless step 2).",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email_or_phone",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; phone or email"
+                },
+                {
+                  "key": "otp",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/otp-verify",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "otp-verify"
+                  ]
+                },
+                "description": "Verify a login OTP and return a token (passwordless step 2).",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "email_or_phone",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; phone or email"
+                    },
+                    {
+                      "key": "otp",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"data\": { \"user\": { \"...\": \"...\" }, \"token\": \"...\" } }\nInvalid OTP -> 400.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /forgot-password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/forgot-password",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "forgot-password"
+              ]
+            },
+            "description": "Send a password-reset OTP to the phone number.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "phone",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; must belong to an existing account"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /update-password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/update-password",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "update-password"
+              ]
+            },
+            "description": "Reset the password using the reset OTP.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "phone",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                },
+                {
+                  "key": "otp",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; 6 digits"
+                },
+                {
+                  "key": "password",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; min 8"
+                },
+                {
+                  "key": "confirm_password",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; must match password"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /social-login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/social-login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "social-login"
+              ]
+            },
+            "description": "Log in or register a user from a Google/Facebook access token.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "access_token",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; token from the Google/Facebook SDK"
+                },
+                {
+                  "key": "provider",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; google or facebook"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/social-login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "social-login"
+                  ]
+                },
+                "description": "Log in or register a user from a Google/Facebook access token.",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "access_token",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; token from the Google/Facebook SDK"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; google or facebook"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"data\": { \"token\": \"...\", \"user\": { \"...\": \"...\" } } }",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/logout",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "logout"
+              ]
+            },
+            "description": "Revoke the current access token.\n\n[Requires Bearer token]"
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/logout",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "logout"
+                  ]
+                },
+                "description": "Revoke the current access token.\n\n[Requires Bearer token]"
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"message\": \"Logged out successfully\" }",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /user-details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/user-details?id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "user-details"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Yes; user id"
+                }
+              ]
+            },
+            "description": "Return the full profile, including subscription plan and coin balance.\n\n[Requires Bearer token]"
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/user-details?id=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user-details"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "",
+                      "description": "Yes; user id"
+                    }
+                  ]
+                },
+                "description": "Return the full profile, including subscription plan and coin balance.\n\n[Requires Bearer token]"
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"code\": 200, \"status\": \"success\", \"message\": \"Retrieve data successfully\",\n  \"data\": { \"user\": {\n    \"id\": 2, \"first_name\": \"Test\", \"last_name\": \"User\",\n    \"email\": \"testuser@flixoo.test\", \"phone\": \"+8801700000000\",\n    \"image\": \"https://<host>/images/default.png\",\n    \"user_type\": \"user\", \"status\": 1, \"client_id\": 1,\n    \"subscription_plan\": \"Free\",\n    \"coin_system_enabled\": true, \"coin_balance\": 0\n  } }\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /update-profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/update-profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "update-profile"
+              ]
+            },
+            "description": "Update the signed-in user's profile (multipart/form-data).\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "user_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; must equal the logged-in user"
+                },
+                {
+                  "key": "first_name",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                },
+                {
+                  "key": "last_name",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                },
+                {
+                  "key": "phone",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; with country code"
+                },
+                {
+                  "key": "email",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                },
+                {
+                  "key": "phone_change_otp",
+                  "value": "",
+                  "type": "text",
+                  "description": "only if phone changed; 6 digits, from /send-phone-change-otp"
+                },
+                {
+                  "key": "gender",
+                  "value": "",
+                  "type": "text",
+                  "description": "No; number"
+                },
+                {
+                  "key": "profile",
+                  "value": "",
+                  "type": "file",
+                  "description": "No; image file, max 2 MB"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /send-phone-change-otp",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/send-phone-change-otp",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "send-phone-change-otp"
+              ]
+            },
+            "description": "Send an OTP to a new phone number before changing it.\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "phone",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; the new number"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /change-password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/change-password",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "change-password"
+              ]
+            },
+            "description": "Change the password for a signed-in user.\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "old_password",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                },
+                {
+                  "key": "new_password",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; min 8"
+                },
+                {
+                  "key": "confirm_password",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; must match new_password"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /delete-account/{id}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/delete-account/{id}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "delete-account",
+                "{id}"
+              ]
+            },
+            "description": "Delete the user account and profile image.\n\n[Requires Bearer token]"
+          }
+        }
+      ]
+    },
+    {
+      "name": "App Config & Ads",
+      "item": [
+        {
+          "name": "GET /config",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/config",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "config"
+              ]
+            },
+            "description": "Return startup settings: currency symbol, ad unit IDs, Stripe key, coin settings."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/config",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "config"
+                  ]
+                },
+                "description": "Return startup settings: currency symbol, ad unit IDs, Stripe key, coin settings."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"code\": 200, \"status\": \"success\", \"message\": \"Config retrieved successfully\",\n  \"data\": {\n    \"currency_symbol\": \"MT\", \"google_drive_api_key\": \"\",\n    \"banner_ads\": null, \"banner_ads_id\": null,\n    \"interstitial_ads\": null, \"interstitial_ads_id\": null,\n    \"stripe_key\": null, \"stripe_secret\": null,\n    \"coin_system_enabled\": true, \"coin_validity_days\": 30,\n    \"default_coin_unlock_duration_hours\": 48\n  }\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /ads",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ads",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ads"
+              ]
+            },
+            "description": "Return currently active ads with ready-to-use banner/poster URLs. 404 when none."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Home & Search",
+      "item": [
+        {
+          "name": "GET /home",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/home",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "home"
+              ]
+            },
+            "description": "Return the entire home screen aggregate in one call."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/home",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "home"
+                  ]
+                },
+                "description": "Return the entire home screen aggregate in one call."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "data contains: sliders, genres, new_release_movies, trending_movies,\nrecommended_movies, featured_movies, popular_tv_shows, featured_tv_channels,\ntv_shows, top_artists, latest_blogs, countries, live_tv_categories,\nprivacy_policy, payment_policy, terms_and_conditions.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /all-genre",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/all-genre",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "all-genre"
+              ]
+            },
+            "description": "Return all active genres."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/all-genre",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "all-genre"
+                  ]
+                },
+                "description": "Return all active genres."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": { \"genres\": [\n    { \"id\": 1, \"name\": \"Action\", \"slug\": \"action\", \"featured\": 0, \"status\": 1 },\n    { \"id\": 2, \"name\": \"Thriller\", \"slug\": \"thriller\", \"featured\": 0, \"status\": 1 }\n  ] }\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /global-search",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/global-search?search=&category=&country=&genre=&year=&type=&per_page=&page=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "global-search"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "",
+                  "description": "No; text to match"
+                },
+                {
+                  "key": "category",
+                  "value": "",
+                  "description": "No; category id"
+                },
+                {
+                  "key": "country",
+                  "value": "",
+                  "description": "No; array of country ids"
+                },
+                {
+                  "key": "genre",
+                  "value": "",
+                  "description": "No; array of genre ids"
+                },
+                {
+                  "key": "year",
+                  "value": "",
+                  "description": "No; release year"
+                },
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "No; movie | tv_show | live_tv"
+                },
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "No; default 10"
+                },
+                {
+                  "key": "page",
+                  "value": "",
+                  "description": "No"
+                }
+              ]
+            },
+            "description": "Search movies, TV shows and live TV together (combined paginated list)."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/global-search?search=&category=&country=&genre=&year=&type=&per_page=&page=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "global-search"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "",
+                      "description": "No; text to match"
+                    },
+                    {
+                      "key": "category",
+                      "value": "",
+                      "description": "No; category id"
+                    },
+                    {
+                      "key": "country",
+                      "value": "",
+                      "description": "No; array of country ids"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "",
+                      "description": "No; array of genre ids"
+                    },
+                    {
+                      "key": "year",
+                      "value": "",
+                      "description": "No; release year"
+                    },
+                    {
+                      "key": "type",
+                      "value": "",
+                      "description": "No; movie | tv_show | live_tv"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "",
+                      "description": "No; default 10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "",
+                      "description": "No"
+                    }
+                  ]
+                },
+                "description": "Search movies, TV shows and live TV together (combined paginated list)."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "data.searched_data is a paginator; each item has a \"type\" field.\ndata.filter carries categories, country, genre, year.\nNote: in search results thumbnail/poster are raw JSON strings\n(\"{\\\"original_image\\\":\\\"https://...\\\"}\") - parse original_image.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /faqs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/faqs",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "faqs"
+              ]
+            },
+            "description": "Return FAQs grouped by category."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/faqs",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "faqs"
+                  ]
+                },
+                "description": "Return FAQs grouped by category."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"data\": [] }",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /contact-us",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/contact-us",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "contact-us"
+              ]
+            },
+            "description": "Submit a contact/support message.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; max 191"
+                },
+                {
+                  "key": "email",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                },
+                {
+                  "key": "subject",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; max 191"
+                },
+                {
+                  "key": "message",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; max 500"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Movies",
+      "item": [
+        {
+          "name": "GET /movies",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/movies?type=&per_page=&page=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "movies"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "No; omit=all; newRelease; or a flag e.g. featured, trending, free"
+                },
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "No; default 20, max 100"
+                },
+                {
+                  "key": "page",
+                  "value": "",
+                  "description": "No"
+                }
+              ]
+            },
+            "description": "Return a paginated movie list plus a filter block."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/movies?type=&per_page=&page=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "",
+                      "description": "No; omit=all; newRelease; or a flag e.g. featured, trending, free"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "",
+                      "description": "No; default 20, max 100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "",
+                      "description": "No"
+                    }
+                  ]
+                },
+                "description": "Return a paginated movie list plus a filter block."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {\n    \"movies\": {\n      \"current_page\": 1,\n      \"data\": [{\n        \"id\": 1, \"title\": \"Jurassic World Rebirth\",\n        \"thumbnail\": \"https://placehold.co/500x750\",\n        \"poster\": \"https://placehold.co/1920x1080\",\n        \"slug\": \"jurassic-world-rebirth\", \"release\": \"2025-07-01\",\n        \"genre\": \"[\\\"1\\\",\\\"2\\\",\\\"3\\\"]\", \"language\": \"[\\\"2\\\",\\\"5\\\"]\",\n        \"runtime\": \"134\", \"is_trending\": 1, \"is_featured\": 1, \"is_free\": 1,\n        \"coin_price\": null, \"imdb_rating\": \"6.399\", \"total_view\": 1\n      }],\n      \"last_page\": 1, \"per_page\": 20, \"total\": 1\n    },\n    \"filter\": { \"categories\": [], \"languages\": [], \"country\": [],\n      \"genre\": [], \"year\": [1975, \"...\", 2026],\n      \"sort\": [\"trending\", \"featured\", \"paid\"] }\n  }\n}\nNote: genre/language/country/stars are JSON-encoded string arrays - decode them.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /movie-details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/movie-details?id=&user_id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "movie-details"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Yes; movie id"
+                },
+                {
+                  "key": "user_id",
+                  "value": "",
+                  "description": "No; for is_favorite, is_rented, coin unlock state"
+                }
+              ]
+            },
+            "description": "Return full movie detail, sources, cast, related, reviews, rental and coin info. Pass user_id for per-user flags."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/movie-details?id=&user_id=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "movie-details"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "",
+                      "description": "Yes; movie id"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "",
+                      "description": "No; for is_favorite, is_rented, coin unlock state"
+                    }
+                  ]
+                },
+                "description": "Return full movie detail, sources, cast, related, reviews, rental and coin info. Pass user_id for per-user flags."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {\n    \"details\": { \"id\": 1, \"title\": \"Jurassic World Rebirth\",\n      \"runtime\": \"2h 14m\", \"is_free\": 1, \"is_favorite\": false },\n    \"server\": [],\n    \"cast\": [{ \"id\": 1, \"star_name\": \"Scarlett Johansson\",\n      \"star_image\": \"https://placehold.co/100x100\" }],\n    \"director\": [{ \"id\": 3, \"star_name\": \"Mahershala Ali\" }],\n    \"writer\": [{ \"id\": 4, \"star_name\": \"...\" }],\n    \"related_movie\": [], \"recommended_movie\": [], \"playlist_ids\": [],\n    \"video_tags\": [\"HD\", \"Blockbuster\", \"Action\"],\n    \"reviews\": [],\n    \"rental\": { \"price\": \"MT0\", \"validity\": \"\", \"expire_data\": \"2026-06-10 06:00:00\" },\n    \"download\": { \"is_downloadable\": 1, \"details\": [] },\n    \"is_rented\": false,\n    \"coin\": { \"enabled\": true, \"coin_price\": null,\n      \"unlock_duration_hours\": null, \"is_unlocked\": false, \"can_watch\": true },\n    \"share_link\": \"https://<host>/movie/jurassic-world-rebirth\"\n  }\n}\nserver holds playable file objects (empty when no media attached).\nUse coin.can_watch to gate the player.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /movie-filter",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/movie-filter?string=&category_id=&language_id=&genre=&country=&year=&sort=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "movie-filter"
+              ],
+              "query": [
+                {
+                  "key": "string",
+                  "value": "",
+                  "description": "No; title search"
+                },
+                {
+                  "key": "category_id",
+                  "value": "",
+                  "description": "No; video type"
+                },
+                {
+                  "key": "language_id",
+                  "value": "",
+                  "description": "No"
+                },
+                {
+                  "key": "genre",
+                  "value": "",
+                  "description": "No"
+                },
+                {
+                  "key": "country",
+                  "value": "",
+                  "description": "No"
+                },
+                {
+                  "key": "year",
+                  "value": "",
+                  "description": "No; release year"
+                },
+                {
+                  "key": "sort",
+                  "value": "",
+                  "description": "No; 1=trending, 2=featured, 3=free"
+                }
+              ]
+            },
+            "description": "Return a filtered, paginated movie list."
+          }
+        }
+      ]
+    },
+    {
+      "name": "TV Shows",
+      "item": [
+        {
+          "name": "GET /tv-shows",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tv-shows?per_page=&page=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tv-shows"
+              ],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "No; default 20"
+                },
+                {
+                  "key": "page",
+                  "value": "",
+                  "description": "No"
+                }
+              ]
+            },
+            "description": "Return a paginated TV show list plus a filter block (sort: 1=paid, 2=original)."
+          }
+        },
+        {
+          "name": "GET /tv-show-details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tv-show-details?id=&user_id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tv-show-details"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Yes; show id"
+                },
+                {
+                  "key": "user_id",
+                  "value": "",
+                  "description": "No; for favorite/rental/per-episode unlock state"
+                }
+              ]
+            },
+            "description": "Return full show detail with seasons, episodes and per-episode access flags. Pass user_id for per-user flags."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/tv-show-details?id=&user_id=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "tv-show-details"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "",
+                      "description": "Yes; show id"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "",
+                      "description": "No; for favorite/rental/per-episode unlock state"
+                    }
+                  ]
+                },
+                "description": "Return full show detail with seasons, episodes and per-episode access flags. Pass user_id for per-user flags."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "data.shows has the show with seasons[].episodes[]. Each episode carries\ncoin_price, coin_unlock_duration_hours, is_unlocked, can_play.\nAlso: cast, director, writer, related_tv_shows, video_tags, rental,\nis_rented, coin_system_enabled, share_link. Use can_play to gate the player.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /tv-show-filter",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tv-show-filter?string=&category_id=&genre=&country=&language=&year=&sort=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tv-show-filter"
+              ],
+              "query": [
+                {
+                  "key": "string",
+                  "value": "",
+                  "description": "No; title search"
+                },
+                {
+                  "key": "category_id",
+                  "value": "",
+                  "description": "No"
+                },
+                {
+                  "key": "genre",
+                  "value": "",
+                  "description": "No"
+                },
+                {
+                  "key": "country",
+                  "value": "",
+                  "description": "No"
+                },
+                {
+                  "key": "language",
+                  "value": "",
+                  "description": "No"
+                },
+                {
+                  "key": "year",
+                  "value": "",
+                  "description": "No"
+                },
+                {
+                  "key": "sort",
+                  "value": "",
+                  "description": "No; 1=free, 2=original"
+                }
+              ]
+            },
+            "description": "Return a filtered, paginated TV show list."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Live TV",
+      "item": [
+        {
+          "name": "GET /live-tvs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/live-tvs?search=&category_id=&country_id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "live-tvs"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "",
+                  "description": "No; channel name"
+                },
+                {
+                  "key": "category_id",
+                  "value": "",
+                  "description": "No"
+                },
+                {
+                  "key": "country_id",
+                  "value": "",
+                  "description": "No"
+                }
+              ]
+            },
+            "description": "Return a paginated channel list plus a filter block."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/live-tvs?search=&category_id=&country_id=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "live-tvs"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "",
+                      "description": "No; channel name"
+                    },
+                    {
+                      "key": "category_id",
+                      "value": "",
+                      "description": "No"
+                    },
+                    {
+                      "key": "country_id",
+                      "value": "",
+                      "description": "No"
+                    }
+                  ]
+                },
+                "description": "Return a paginated channel list plus a filter block."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {\n    \"live_tvs\": {\n      \"current_page\": 1,\n      \"data\": [{\n        \"id\": 1, \"tv_name\": \"channel\", \"slug\": \"channel\",\n        \"live_tv_category_id\": 1, \"country_id\": 14, \"stream_label\": \"HD\",\n        \"stream_url\": \"http://103.230.105.252:1935/live/btv/manifest.m3u8\",\n        \"thumbnail\": \"https://placehold.co/400x320\",\n        \"featured\": 1, \"is_free\": 1, \"status\": 1\n      }],\n      \"last_page\": 1, \"per_page\": 20, \"total\": 1\n    },\n    \"filter\": { \"categories\": [], \"country\": [] }\n  }\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /live-tv-details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/live-tv-details?id=&user_id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "live-tv-details"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Yes; channel id"
+                },
+                {
+                  "key": "user_id",
+                  "value": "",
+                  "description": "No; for is_favorite"
+                }
+              ]
+            },
+            "description": "Return one channel with its stream URLs and related channels. Pass user_id for is_favorite."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/live-tv-details?id=&user_id=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "live-tv-details"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "",
+                      "description": "Yes; channel id"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "",
+                      "description": "No; for is_favorite"
+                    }
+                  ]
+                },
+                "description": "Return one channel with its stream URLs and related channels. Pass user_id for is_favorite."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "data.stream is a list of { id, stream_url, stream_label }.\nAlso returns live_tv_details, related_live_tvs, share_link.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Audio Series",
+      "item": [
+        {
+          "name": "GET /audio-series",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/audio-series?type=&per_page=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "audio-series"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "No; featured | latest/new | default"
+                },
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "No; default 12, max 100"
+                }
+              ]
+            },
+            "description": "Return a paginated list of audio series cards."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/audio-series?type=&per_page=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "audio-series"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "",
+                      "description": "No; featured | latest/new | default"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "",
+                      "description": "No; default 12, max 100"
+                    }
+                  ]
+                },
+                "description": "Return a paginated list of audio series cards."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": { \"series\": { \"current_page\": 1, \"data\": [], \"per_page\": 12, \"total\": 0 } }\n}\nEach card: id, title, slug, is_free, is_featured, poster, thumbnail, share_link.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /audio-series-details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/audio-series-details?slug=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "audio-series-details"
+              ],
+              "query": [
+                {
+                  "key": "slug",
+                  "value": "",
+                  "description": "Yes; series slug"
+                }
+              ]
+            },
+            "description": "Return one series with its episode list and per-episode access flags."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/audio-series-details?slug=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "audio-series-details"
+                  ],
+                  "query": [
+                    {
+                      "key": "slug",
+                      "value": "",
+                      "description": "Yes; series slug"
+                    }
+                  ]
+                },
+                "description": "Return one series with its episode list and per-episode access flags."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "Returns series, is_favorite, coin_system, episodes[].\nEach episode: can_play, is_locked, coin_price, and stream_url only when playable.\nUnknown slug -> 404. Send Bearer token (optional) for accurate playability.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /audio-episode-stream",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/audio-episode-stream?slug=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "audio-episode-stream"
+              ],
+              "query": [
+                {
+                  "key": "slug",
+                  "value": "",
+                  "description": "Yes; episode slug"
+                }
+              ]
+            },
+            "description": "Return the playable stream payload for one episode, enforcing access.\n\n[Requires Bearer token]"
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/audio-episode-stream?slug=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "audio-episode-stream"
+                  ],
+                  "query": [
+                    {
+                      "key": "slug",
+                      "value": "",
+                      "description": "Yes; episode slug"
+                    }
+                  ]
+                },
+                "description": "Return the playable stream payload for one episode, enforcing access.\n\n[Requires Bearer token]"
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "403 if the user must subscribe/unlock first; 404 if not found.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Coins",
+      "item": [
+        {
+          "name": "GET /coin-packages",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/coin-packages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "coin-packages"
+              ]
+            },
+            "description": "Return active coin packages for the buy-coins screen."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/coin-packages",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "coin-packages"
+                  ]
+                },
+                "description": "Return active coin packages for the buy-coins screen."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"data\": { \"packages\": [] } }\nEach package: { id, title, coins, price, currency }.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /coin-balance",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/coin-balance",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "coin-balance"
+              ]
+            },
+            "description": "Return the current coin balance.\n\n[Requires Bearer token]"
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/coin-balance",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "coin-balance"
+                  ]
+                },
+                "description": "Return the current coin balance.\n\n[Requires Bearer token]"
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"data\": { \"coin_system_enabled\": true, \"balance\": 0 } }",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /coin-transactions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/coin-transactions?per_page=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "coin-transactions"
+              ],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "",
+                  "description": "No; default 20"
+                }
+              ]
+            },
+            "description": "Return paginated coin transaction history.\n\n[Requires Bearer token]"
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/coin-transactions?per_page=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "coin-transactions"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "",
+                      "description": "No; default 20"
+                    }
+                  ]
+                },
+                "description": "Return paginated coin transaction history.\n\n[Requires Bearer token]"
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "Each item: { id, amount, type, source, balance_after, created_at }.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /unlock-with-coins",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/unlock-with-coins",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "unlock-with-coins"
+              ]
+            },
+            "description": "Spend coins to unlock premium content for a limited time.\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "content_type",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; movie | tv_episode | audio_episode"
+                },
+                {
+                  "key": "content_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; content id (integer, min 1)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/unlock-with-coins",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "unlock-with-coins"
+                  ]
+                },
+                "description": "Spend coins to unlock premium content for a limited time.\n\n[Requires Bearer token]",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "content_type",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; movie | tv_episode | audio_episode"
+                    },
+                    {
+                      "key": "content_id",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; content id (integer, min 1)"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "Success:\n{ \"data\": { \"expires_at\": \"2026-06-12 04:00:00\", \"balance\": 70 } }\nValidation error:\n{\n  \"code\": 422, \"status\": \"error\", \"message\": \"Required field missing\",\n  \"data\": {\n    \"content_type\": [\"The selected content type is invalid.\"],\n    \"content_id\": [\"The content id field is required.\"]\n  }\n}\nInsufficient balance or coin system off -> 422 with a message.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Subscriptions & Payments",
+      "item": [
+        {
+          "name": "GET /packages",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/packages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "packages"
+              ]
+            },
+            "description": "Return active subscription plans with formatted price and a store id."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/packages",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "packages"
+                  ]
+                },
+                "description": "Return active subscription plans with formatted price and a store id."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": { \"packages\": [\n    { \"id\": 1, \"name\": \"Basic\", \"day\": 7, \"screens\": 3, \"type\": \"monthly\",\n      \"price\": \"MT200\", \"discount\": 0, \"status\": 1,\n      \"storeSubscriptionId\": \"basic_MT200_1m\" },\n    { \"id\": 3, \"name\": \"Ultra \", \"day\": 28, \"screens\": 8, \"type\": \"monthly\",\n      \"price\": \"MT500\", \"storeSubscriptionId\": \"ultra_MT500_1m\" }\n  ] }\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /get-subscription",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/get-subscription?user_id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "get-subscription"
+              ],
+              "query": [
+                {
+                  "key": "user_id",
+                  "value": "",
+                  "description": "Yes"
+                }
+              ]
+            },
+            "description": "Return the user's current subscription status."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/get-subscription?user_id=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "get-subscription"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "",
+                      "description": "Yes"
+                    }
+                  ]
+                },
+                "description": "Return the user's current subscription status."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {\n    \"is_subscribed\": true, \"status\": \"active\", \"package_title\": \"Premium\",\n    \"subscription_start\": \"2026-06-01 10:00:00\",\n    \"subscription_end\": \"2026-07-01 10:00:00\",\n    \"remaining_days\": 21, \"expire_date\": \"01-07-2026\"\n  }\n}\nNo subscription -> is_subscribed:false, status:\"inactive\".",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /payment-history",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/payment-history?user_id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "payment-history"
+              ],
+              "query": [
+                {
+                  "key": "user_id",
+                  "value": "",
+                  "description": "Yes"
+                }
+              ]
+            },
+            "description": "Return the user's paginated subscription/payment history.\n\n[Requires Bearer token]"
+          }
+        },
+        {
+          "name": "POST /offline-success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/offline-success",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offline-success"
+              ]
+            },
+            "description": "Finalize a purchase (subscription or rental) after payment.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "transaction_key",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; transaction id"
+                },
+                {
+                  "key": "payment_type",
+                  "value": "",
+                  "type": "text",
+                  "description": "No; rental, or blank for subscription"
+                },
+                {
+                  "key": "payment_method",
+                  "value": "",
+                  "type": "text",
+                  "description": "No; offline = pending admin approval"
+                },
+                {
+                  "key": "status",
+                  "value": "",
+                  "type": "text",
+                  "description": "No; 1 = paid"
+                },
+                {
+                  "key": "plan_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "No; subscription plan id"
+                },
+                {
+                  "key": "user_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "No; the buyer"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/offline-success",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "offline-success"
+                  ]
+                },
+                "description": "Finalize a purchase (subscription or rental) after payment.",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "transaction_key",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; transaction id"
+                    },
+                    {
+                      "key": "payment_type",
+                      "value": "",
+                      "type": "text",
+                      "description": "No; rental, or blank for subscription"
+                    },
+                    {
+                      "key": "payment_method",
+                      "value": "",
+                      "type": "text",
+                      "description": "No; offline = pending admin approval"
+                    },
+                    {
+                      "key": "status",
+                      "value": "",
+                      "type": "text",
+                      "description": "No; 1 = paid"
+                    },
+                    {
+                      "key": "plan_id",
+                      "value": "",
+                      "type": "text",
+                      "description": "No; subscription plan id"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "",
+                      "type": "text",
+                      "description": "No; the buyer"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "Online payments activate immediately; offline payments are pending approval.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reviews & Ratings",
+      "item": [
+        {
+          "name": "GET /review-list",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/review-list?reviewable_type=&reviewable_id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "review-list"
+              ],
+              "query": [
+                {
+                  "key": "reviewable_type",
+                  "value": "",
+                  "description": "Yes; movie | tvshow | blog"
+                },
+                {
+                  "key": "reviewable_id",
+                  "value": "",
+                  "description": "Yes; content id"
+                }
+              ]
+            },
+            "description": "Return reviews for a piece of content. Send the Bearer token for accurate is_liked."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/review-list?reviewable_type=&reviewable_id=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "review-list"
+                  ],
+                  "query": [
+                    {
+                      "key": "reviewable_type",
+                      "value": "",
+                      "description": "Yes; movie | tvshow | blog"
+                    },
+                    {
+                      "key": "reviewable_id",
+                      "value": "",
+                      "description": "Yes; content id"
+                    }
+                  ]
+                },
+                "description": "Return reviews for a piece of content. Send the Bearer token for accurate is_liked."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "Each review: { id, review, rating, created_at, user, total_likes, is_liked }.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /rating",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/rating",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "rating"
+              ]
+            },
+            "description": "Create a rating and review for a piece of content.\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "rating",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; 1-5"
+                },
+                {
+                  "key": "review",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; text"
+                },
+                {
+                  "key": "reviewable_type",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; movie | tvshow | blog"
+                },
+                {
+                  "key": "reviewable_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /like-toggle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/like-toggle",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "like-toggle"
+              ]
+            },
+            "description": "Toggle a like on a review.\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "review_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/like-toggle",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "like-toggle"
+                  ]
+                },
+                "description": "Toggle a like on a review.\n\n[Requires Bearer token]",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "review_id",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"liked\": true|false, \"count\": <n> }",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Playlists (Auth)",
+      "item": [
+        {
+          "name": "GET /playlists",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/playlists",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "playlists"
+              ]
+            },
+            "description": "Return the user's playlists.\n\n[Requires Bearer token]"
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/playlists",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "playlists"
+                  ]
+                },
+                "description": "Return the user's playlists.\n\n[Requires Bearer token]"
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"data\": { \"play_lists\": [] } }",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /create-playlist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/create-playlist",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "create-playlist"
+              ]
+            },
+            "description": "Create a playlist (multipart/form-data).\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; max 255, unique per user"
+                },
+                {
+                  "key": "thumbnail",
+                  "value": "",
+                  "type": "file",
+                  "description": "No; image (jpeg/png/jpg/gif)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /update-playlist/{id}",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/update-playlist/{id}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "update-playlist",
+                "{id}"
+              ]
+            },
+            "description": "Rename/update a playlist.\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                },
+                {
+                  "key": "thumbnail",
+                  "value": "",
+                  "type": "file",
+                  "description": "No"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "DELETE /delete-playlist/{id}",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/delete-playlist/{id}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "delete-playlist",
+                "{id}"
+              ]
+            },
+            "description": "Delete a playlist.\n\n[Requires Bearer token]"
+          }
+        },
+        {
+          "name": "GET /get-play-list-movies/{id}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/get-play-list-movies/{id}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "get-play-list-movies",
+                "{id}"
+              ]
+            },
+            "description": "Return the playlist with its movies.\n\n[Requires Bearer token]"
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/get-play-list-movies/{id}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "get-play-list-movies",
+                    "{id}"
+                  ]
+                },
+                "description": "Return the playlist with its movies.\n\n[Requires Bearer token]"
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "Returns playlist_details and play_list_videos.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /playlists/add-movie",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/playlists/add-movie",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "playlists",
+                "add-movie"
+              ]
+            },
+            "description": "Add a movie to one or more playlists.\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "playlist_ids",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; array of playlist ids"
+                },
+                {
+                  "key": "movie_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /playlists/remove-movie",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/playlists/remove-movie",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "playlists",
+                "remove-movie"
+              ]
+            },
+            "description": "Remove a movie from a playlist.\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "playlist_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                },
+                {
+                  "key": "movie_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /get-playlist-ids/{movieId}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/get-playlist-ids/{movieId}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "get-playlist-ids",
+                "{movieId}"
+              ]
+            },
+            "description": "Return ids of playlists that contain the given movie.\n\n[Requires Bearer token]"
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/get-playlist-ids/{movieId}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "get-playlist-ids",
+                    "{movieId}"
+                  ]
+                },
+                "description": "Return ids of playlists that contain the given movie.\n\n[Requires Bearer token]"
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"playlist_ids\": [] }",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Favorites (Auth)",
+      "item": [
+        {
+          "name": "POST /favorite/toggle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/favorite/toggle",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "favorite",
+                "toggle"
+              ]
+            },
+            "description": "Add or remove an item from favorites.\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "type",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; movie | tv_show | live_tv | audio_series"
+                },
+                {
+                  "key": "id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; content id"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /favorites",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/favorites",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "favorites"
+              ]
+            },
+            "description": "Return favorites grouped by type.\n\n[Requires Bearer token]"
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/favorites",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "favorites"
+                  ]
+                },
+                "description": "Return favorites grouped by type.\n\n[Requires Bearer token]"
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{ \"data\": { \"movies\": [], \"tv_shows\": [], \"live_tvs\": [], \"audio_series\": [] } }",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Watch History (Auth)",
+      "item": [
+        {
+          "name": "GET /watch-histories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/watch-histories?user_id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "watch-histories"
+              ],
+              "query": [
+                {
+                  "key": "user_id",
+                  "value": "",
+                  "description": "Yes"
+                }
+              ]
+            },
+            "description": "Return paginated watch history with title/thumbnail, watched minutes and completion %.\n\n[Requires Bearer token]"
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/watch-histories?user_id=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "watch-histories"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "",
+                      "description": "Yes"
+                    }
+                  ]
+                },
+                "description": "Return paginated watch history with title/thumbnail, watched minutes and completion %.\n\n[Requires Bearer token]"
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "Empty:\n{ \"code\": 404, \"status\": \"error\", \"message\": \"History is empty\", \"data\": [] }",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /watch-history-store",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/watch-history-store",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "watch-history-store"
+              ]
+            },
+            "description": "Save/update the resume position for a title. Call periodically during playback.\n\n[Requires Bearer token]",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "user_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                },
+                {
+                  "key": "watchable_type",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; movie | episode | tv_channel"
+                },
+                {
+                  "key": "watchable_id",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; must exist for that type"
+                },
+                {
+                  "key": "duration",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; total length in seconds"
+                },
+                {
+                  "key": "watched_seconds",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; current position in seconds"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/watch-history-store",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "watch-history-store"
+                  ]
+                },
+                "description": "Save/update the resume position for a title. Call periodically during playback.\n\n[Requires Bearer token]",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "user_id",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes"
+                    },
+                    {
+                      "key": "watchable_type",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; movie | episode | tv_channel"
+                    },
+                    {
+                      "key": "watchable_id",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; must exist for that type"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; total length in seconds"
+                    },
+                    {
+                      "key": "watched_seconds",
+                      "value": "",
+                      "type": "text",
+                      "description": "Yes; current position in seconds"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "Only updates when the new position is further than the last saved.",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rentals (Auth)",
+      "item": [
+        {
+          "name": "GET /rent-video-list",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/rent-video-list?user_id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "rent-video-list"
+              ],
+              "query": [
+                {
+                  "key": "user_id",
+                  "value": "",
+                  "description": "Yes"
+                }
+              ]
+            },
+            "description": "Return the user's rented videos (movie/tv_show/live_tv) with title and image.\n\n[Requires Bearer token]"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Artists",
+      "item": [
+        {
+          "name": "GET /artists",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/artists?name=&country=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "artists"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "",
+                  "description": "No; name search"
+                },
+                {
+                  "key": "country",
+                  "value": "",
+                  "description": "No; country id"
+                }
+              ]
+            },
+            "description": "Return a paginated artist list (20/page) plus a filter block."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/artists?name=&country=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "artists"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "",
+                      "description": "No; name search"
+                    },
+                    {
+                      "key": "country",
+                      "value": "",
+                      "description": "No; country id"
+                    }
+                  ]
+                },
+                "description": "Return a paginated artist list (20/page) plus a filter block."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": {\n    \"artists\": {\n      \"current_page\": 1,\n      \"data\": [{ \"id\": 1, \"star_name\": \"Scarlett Johansson\",\n        \"slug\": \"scarlett-johansson\", \"star_type\": \"actor\",\n        \"star_image\": \"https://placehold.co/100x100\", \"status\": 1,\n        \"total_movies\": 0, \"total_tv_shows\": 0 }],\n      \"last_page\": 1, \"per_page\": 20, \"total\": 5\n    },\n    \"filter\": { \"countries\": [],\n      \"movie_industries\": [\n        { \"id\": 1, \"name\": \"Hollywood\", \"status\": 1 },\n        { \"id\": 2, \"name\": \"Bollywood\", \"status\": 1 },\n        { \"id\": 3, \"name\": \"Tollywood\", \"status\": 1 }\n      ] }\n  }\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "GET /artist-details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/artist-details?id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "artist-details"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Yes; star id"
+                }
+              ]
+            },
+            "description": "Return one artist plus the movies they appear in."
+          }
+        },
+        {
+          "name": "POST /artist-filter",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/artist-filter",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "artist-filter"
+              ]
+            },
+            "description": "Return artists matching a name.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Blogs",
+      "item": [
+        {
+          "name": "GET /blogs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/blogs",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blogs"
+              ]
+            },
+            "description": "Return a paginated blog list (10/page) plus a filter block."
+          }
+        },
+        {
+          "name": "GET /blog-categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/blog-categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blog-categories"
+              ]
+            },
+            "description": "Return top-level blog categories with their active children."
+          }
+        },
+        {
+          "name": "GET /blog-details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/blog-details?id=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blog-details"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Yes; blog id"
+                }
+              ]
+            },
+            "description": "Return one blog plus related blogs."
+          }
+        },
+        {
+          "name": "GET /blog-filter",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/blog-filter?string=&category_id=&year=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "blog-filter"
+              ],
+              "query": [
+                {
+                  "key": "string",
+                  "value": "",
+                  "description": "No; title search"
+                },
+                {
+                  "key": "category_id",
+                  "value": "",
+                  "description": "No"
+                },
+                {
+                  "key": "year",
+                  "value": "",
+                  "description": "No"
+                }
+              ]
+            },
+            "description": "Return a filtered blog list."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Interests",
+      "item": [
+        {
+          "name": "GET /interest",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/interest",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "interest"
+              ]
+            },
+            "description": "Return the list of available interests."
+          },
+          "response": [
+            {
+              "name": "Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "apiKey",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/interest",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "interest"
+                  ]
+                },
+                "description": "Return the list of available interests."
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": { \"interests\": [\n    { \"id\": 1, \"title\": \"Action\", \"status\": 1 },\n    { \"id\": 2, \"title\": \"Drama\", \"status\": 1 }\n  ] }\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "POST /interest-store",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "apiKey",
+                "value": "{{api_key}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/interest-store",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "interest-store"
+              ]
+            },
+            "description": "Save the user's selected interests.",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; identifies the user"
+                },
+                {
+                  "key": "interest_ids",
+                  "value": "",
+                  "type": "text",
+                  "description": "Yes; array of interest ids"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://demo-b2b.drix.app/api"
+    },
+    {
+      "key": "api_key",
+      "value": "REPLACE_WITH_YOUR_API_KEY"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    }
+  ]
+}
