@@ -63,6 +63,25 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _fetchDeviceInfo() async {
     try {
       _deviceInfo = await DeviceControlService.instance.getFullDeviceInfo();
+      debugPrint('📱 [LOGIN] Device details: $_deviceInfo');
+
+      final String imei1 = _deviceInfo['imei1']?.toString() ??
+          _deviceInfo['imei']?.toString() ??
+          SharedPreferencesService.getIMEI();
+
+      final String imei2 = _deviceInfo['imei2']?.toString() ??
+          SharedPreferencesService.getIMEI2();
+
+      if (mounted) {
+        setState(() {
+          if (_imei1Controller.text.isEmpty && imei1.isNotEmpty) {
+            _imei1Controller.text = imei1;
+          }
+          if (_imei2Controller.text.isEmpty && imei2.isNotEmpty) {
+            _imei2Controller.text = imei2;
+          }
+        });
+      }
     } catch (e) {
       debugPrint('❌ [LOGIN] Error getting device details: $e');
     }
@@ -121,18 +140,28 @@ class _LoginScreenState extends State<LoginScreen> {
 
       final response = await _apiService.trackDevice(trackData);
 
-      if (response != null && response['success'] == true) {
-        final data = response['data'];
-        final bool isLocked = data['isLocked'] ?? false;
-
+      if (response != null) {
         await SharedPreferencesService.setIMEI(inputImei1);
-        await SharedPreferencesService.saveLockData(data);
+        await SharedPreferencesService.setIMEI2(inputImei2);
+        final applied = await DeviceControlService.instance.applyServerProfile(
+          response,
+        );
+        DeviceControlService.instance.startLockStatusSync();
 
-        if (isLocked) {
+        if (response.isLocked) {
+          if (!applied) {
+            if (mounted) {
+              setState(() {
+                _errorMessage =
+                    'Lock is pending. This APK must first be provisioned as '
+                    'the Device Owner.';
+              });
+            }
+            return;
+          }
           debugPrint(
             '🔒 [LOGIN] Device is LOCKED. Redirecting to LockScreen...',
           );
-          await DeviceControlService.instance.lockDevice();
           if (mounted) {
             Navigator.pushNamedAndRemoveUntil(
               context,
@@ -142,8 +171,6 @@ class _LoginScreenState extends State<LoginScreen> {
           }
         } else {
           debugPrint('🔓 [LOGIN] Device is UNLOCKED. Proceeding to Home...');
-          await DeviceControlService.instance.unlockDevice();
-          DeviceControlService.instance.startLockStatusSync();
           if (mounted) {
             Navigator.pushNamedAndRemoveUntil(
               context,

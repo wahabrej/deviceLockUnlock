@@ -3,15 +3,20 @@ import 'package:devicelocunlock/screens/home_screen.dart';
 import 'package:devicelocunlock/screens/lock_screen.dart';
 import 'package:devicelocunlock/screens/login_screen.dart';
 import 'package:devicelocunlock/services/device_control_service.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'core/routes/App_Routes.dart';
+import 'firebase_options.dart';
 import 'services/shared_preferences_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   // SharedPreferences initialization

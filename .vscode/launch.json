@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "SmartPay Device Lock (Run - No Debug)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "noDebug": true
+    },
+    {
+      "name": "SmartPay Device Lock (Debug)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart"
+    },
+    {
+      "name": "SmartPay Device Lock (With Default API URL)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": [
+        "--dart-define=SMART_PAY_APK_API_BASE_URL=https://api.smartpay.click/apk"
+      ]
+    }
+  ]
+}

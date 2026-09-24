@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:devicelocunlock/models/device_status_profile.dart';
+import 'package:devicelocunlock/services/shared_preferences_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 
@@ -14,12 +16,17 @@ class ApiService {
     defaultValue: '',
   );
 
+  String get _deviceTrackKey {
+    final storedKey = SharedPreferencesService.getDeviceTrackKey();
+    return storedKey.isNotEmpty ? storedKey : deviceTrackKey;
+  }
+
   Map<String, String> get _jsonHeaders => {
     'Content-Type': 'application/json',
-    if (deviceTrackKey.isNotEmpty) 'x-device-key': deviceTrackKey,
+    if (_deviceTrackKey.isNotEmpty) 'x-device-key': _deviceTrackKey,
   };
 
-  Future<Map<String, dynamic>?> trackDevice(
+  Future<DeviceStatusProfile?> trackDevice(
     Map<String, dynamic> deviceData,
   ) async {
     try {
@@ -32,7 +39,7 @@ class ApiService {
           .timeout(const Duration(seconds: 15));
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return jsonDecode(response.body);
+        return _parseProfileResponse(response.body);
       }
       debugPrint(
         '[API] trackDevice failed: ${response.statusCode} ${response.body}',
@@ -44,17 +51,19 @@ class ApiService {
     }
   }
 
-  Future<Map<String, dynamic>?> getLockStatus(String imei) async {
+  Future<DeviceStatusProfile?> getLockStatus(String imei) async {
     try {
       final response = await http
           .get(
-            Uri.parse('$baseUrl/devices/$imei/lock-status'),
+            Uri.parse(
+              '$baseUrl/devices/${Uri.encodeComponent(imei)}/lock-status',
+            ),
             headers: _jsonHeaders,
           )
           .timeout(const Duration(seconds: 10));
 
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+        return _parseProfileResponse(response.body);
       }
       debugPrint(
         '[API] getLockStatus failed: ${response.statusCode} ${response.body}',
@@ -69,6 +78,21 @@ class ApiService {
     } catch (e) {
       // Software caused connection abort হ্যান্ডেল করা হচ্ছে
       debugPrint('⚠️ [API] getLockStatus Exception: $e');
+      return null;
+    }
+  }
+
+  DeviceStatusProfile? _parseProfileResponse(String responseBody) {
+    try {
+      final decoded = jsonDecode(responseBody);
+      if (decoded is! Map) return null;
+      final response = decoded.map(
+        (key, value) => MapEntry(key.toString(), value),
+      );
+      if (response['success'] == false) return null;
+      return DeviceStatusProfile.fromApiResponse(response);
+    } on FormatException catch (error) {
+      debugPrint('[API] Invalid device status response: $error');
       return null;
     }
   }

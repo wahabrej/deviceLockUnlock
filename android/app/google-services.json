@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "790766635338",
+    "project_id": "smartpaydevicemanagement-5d26b",
+    "storage_bucket": "smartpaydevicemanagement-5d26b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790766635338:android:47672345913b7dfde159b3",
+        "android_client_info": {
+          "package_name": "com.example.devicelocunlock"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcs14YLyNlQXU_vdThSiL4Zl6uay_j-N4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,11 +2,8 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
+    id("com.google.gms.google-services")
 }
-
-// The Google Services plugin is commented out because google-services.json is missing.
-// To use Firebase, add your google-services.json to this directory and uncomment the line below.
-// apply(plugin = "com.google.gms.google-services")
 
 fun buildConfigString(propertyName: String, defaultValue: String): String {
     val value = providers.gradleProperty(propertyName).orNull ?: defaultValue

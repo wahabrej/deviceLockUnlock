@@ -1,9 +1,11 @@
+import 'package:devicelocunlock/models/device_status_profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesService {
   static late SharedPreferences _prefs;
 
   static const String KEY_IMEI = 'device_imei';
+  static const String KEY_IMEI_2 = 'device_imei_2';
   static const String KEY_FCM_TOKEN = 'fcm_token';
   static const String KEY_DEVICE_LOCKED = 'device_locked';
   static const String KEY_LOCK_REASON = 'lock_reason';
@@ -13,6 +15,8 @@ class SharedPreferencesService {
   static const String KEY_ADMIN_ACTIVE = 'admin_active';
   static const String KEY_DEVICE_ID = 'device_id';
   static const String KEY_DEVICE_TRACK_KEY = 'device_track_key';
+  static const String KEY_DEVICE_STATUS_PROFILE = 'device_status_profile';
+  static const String KEY_LOCK_REVISION = 'lock_revision';
   static const String _configuredDeviceTrackKey = String.fromEnvironment(
     'DEVICE_TRACK_KEY',
     defaultValue: '',
@@ -48,6 +52,15 @@ class SharedPreferencesService {
     return _prefs.getString(KEY_IMEI) ?? '';
   }
 
+  // IMEI 2
+  static Future<void> setIMEI2(String imei) async {
+    await _prefs.setString(KEY_IMEI_2, imei);
+  }
+
+  static String getIMEI2() {
+    return _prefs.getString(KEY_IMEI_2) ?? '';
+  }
+
   // FCM Token
   static Future<void> setFCMToken(String token) async {
     await _prefs.setString(KEY_FCM_TOKEN, token);
@@ -75,13 +88,49 @@ class SharedPreferencesService {
     return _prefs.getBool(KEY_DEVICE_LOCKED) ?? false;
   }
 
-  // Save Lock Data from API
+  // Save rich status/profile data from the API. The applied lock flag is
+  // intentionally stored separately and is updated only after native policy
+  // enforcement succeeds.
+  static Future<void> saveDeviceProfile(DeviceStatusProfile profile) async {
+    await _prefs.setString(KEY_DEVICE_STATUS_PROFILE, profile.toStorage());
+    await _prefs.setInt(KEY_LOCK_REVISION, profile.lockRevision);
+
+    if (profile.canonicalImei.isNotEmpty) {
+      await _prefs.setString(KEY_IMEI, profile.canonicalImei);
+    }
+    await _prefs.setString(KEY_LOCK_REASON, profile.lockReason ?? '');
+    await _prefs.setString(KEY_CUSTOMER_NAME, profile.customer?.name ?? '');
+    await _prefs.setString(KEY_LOAN_STATUS, profile.loan?.status ?? '');
+    await _prefs.setString(
+      KEY_NEXT_DUE_DATE,
+      profile.payment?.nextDueDate ?? profile.loan?.nextDueDate ?? '',
+    );
+  }
+
+  static DeviceStatusProfile getDeviceProfile() {
+    final cached = _prefs.getString(KEY_DEVICE_STATUS_PROFILE);
+    if (cached != null && cached.isNotEmpty) {
+      return DeviceStatusProfile.fromStorage(cached);
+    }
+
+    return DeviceStatusProfile(
+      isLocked: isDeviceLocked(),
+      lockRevision: _prefs.getInt(KEY_LOCK_REVISION) ?? 0,
+      lockReason: getLockReason(),
+      imei: getIMEI(),
+      customer: CustomerDetails(
+        name: getCustomerName(),
+      ),
+      loan: LoanDetails(
+        status: _prefs.getString(KEY_LOAN_STATUS),
+        nextDueDate: _prefs.getString(KEY_NEXT_DUE_DATE),
+      ),
+    );
+  }
+
+  // Backward-compatible adapter for older callers.
   static Future<void> saveLockData(Map<String, dynamic> data) async {
-    await _prefs.setBool(KEY_DEVICE_LOCKED, data['isLocked'] ?? false);
-    await _prefs.setString(KEY_LOCK_REASON, data['lockReason'] ?? '');
-    await _prefs.setString(KEY_CUSTOMER_NAME, data['customerName'] ?? '');
-    await _prefs.setString(KEY_LOAN_STATUS, data['loanStatus'] ?? '');
-    await _prefs.setString(KEY_NEXT_DUE_DATE, data['nextDueDate'] ?? '');
+    await saveDeviceProfile(DeviceStatusProfile.fromJson(data));
   }
 
   static String getLockReason() => _prefs.getString(KEY_LOCK_REASON) ?? '';
