@@ -3,6 +3,7 @@ package com.example.devicelocunlock
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -25,6 +26,7 @@ class MainActivity : FlutterActivity() {
                     "lockDevice" -> result.success(applyLockState(this, true, true))
                     "unlockDevice" -> result.success(applyLockState(this, false, false))
                     "isDeviceOwner" -> result.success(isDeviceOwner())
+                    "requestDeviceAdmin" -> requestDeviceAdmin(result)
                     "getDeviceId" -> result.success(readDeviceId())
                     else -> result.notImplemented()
                 }
@@ -48,6 +50,45 @@ class MainActivity : FlutterActivity() {
             }
     }
 
+        private var pendingDeviceAdminResult: MethodChannel.Result? = null
+
+        private fun requestDeviceAdmin(result: MethodChannel.Result) {
+            val devicePolicyManager = getSystemService(DevicePolicyManager::class.java)
+            val adminComponent = ComponentName(this, DeviceAdminReceiver::class.java)
+            if (devicePolicyManager.isAdminActive(adminComponent) || isDeviceOwner()) {
+                result.success(true)
+                return
+            }
+
+            val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN).apply {
+                putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, adminComponent)
+                putExtra(
+                    DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                    "Allow SmartPay to lock this device for local testing.",
+                )
+            }
+            pendingDeviceAdminResult = result
+            try {
+                startActivityForResult(intent, REQUEST_DEVICE_ADMIN)
+            } catch (error: Exception) {
+                pendingDeviceAdminResult = null
+                result.error("DEVICE_ADMIN_REQUEST_FAILED", error.message, null)
+            }
+        }
+
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+            super.onActivityResult(requestCode, resultCode, data)
+            if (requestCode != REQUEST_DEVICE_ADMIN) return
+
+            val result = pendingDeviceAdminResult ?: return
+            pendingDeviceAdminResult = null
+            val devicePolicyManager = getSystemService(DevicePolicyManager::class.java)
+            val adminComponent = ComponentName(this, DeviceAdminReceiver::class.java)
+            result.success(
+                devicePolicyManager.isAdminActive(adminComponent) || isDeviceOwner(),
+            )
+        }
+
     private fun isDeviceOwner(): Boolean =
         getSystemService(DevicePolicyManager::class.java).isDeviceOwnerApp(packageName)
 
@@ -59,6 +100,7 @@ class MainActivity : FlutterActivity() {
         private const val DEVICE_CHANNEL = "com.example.devicelocunlock/device"
         private const val PREFS_NAME = "FlutterSharedPreferences"
         private const val LOCKED_KEY = "flutter.device_locked"
+        private const val REQUEST_DEVICE_ADMIN = 701
 
         private var instance: MainActivity? = null
 

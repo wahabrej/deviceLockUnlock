@@ -197,6 +197,16 @@ class DeviceControlService extends ChangeNotifier {
     return _isDeviceOwner;
   }
 
+  Future<bool> requestDeviceAdmin() async {
+    try {
+      return await _controlsChannel.invokeMethod<bool>('requestDeviceAdmin') ??
+          false;
+    } catch (error) {
+      debugPrint('[DeviceControl] Device Admin request failed: $error');
+      return false;
+    }
+  }
+
   Future<String> getDeviceId() async {
     try {
       final id =
@@ -251,9 +261,7 @@ class DeviceControlService extends ChangeNotifier {
     if (value is bool) return value;
     if (value is num) return value != 0;
     final normalized = value?.toString().trim().toLowerCase();
-    return normalized == 'true' ||
-        normalized == '1' ||
-        normalized == 'locked';
+    return normalized == 'true' || normalized == '1' || normalized == 'locked';
   }
 
   static int? _asInt(dynamic value) {

@@ -23,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final FocusNode _phoneFocusNode = FocusNode();
 
   bool _isLoading = false;
+  bool _isLocalLocking = false;
   String? _errorMessage;
   Map<String, dynamic> _deviceInfo = {};
 
@@ -65,11 +66,13 @@ class _LoginScreenState extends State<LoginScreen> {
       _deviceInfo = await DeviceControlService.instance.getFullDeviceInfo();
       debugPrint('📱 [LOGIN] Device details: $_deviceInfo');
 
-      final String imei1 = _deviceInfo['imei1']?.toString() ??
+      final String imei1 =
+          _deviceInfo['imei1']?.toString() ??
           _deviceInfo['imei']?.toString() ??
           SharedPreferencesService.getIMEI();
 
-      final String imei2 = _deviceInfo['imei2']?.toString() ??
+      final String imei2 =
+          _deviceInfo['imei2']?.toString() ??
           SharedPreferencesService.getIMEI2();
 
       if (mounted) {
@@ -193,6 +196,37 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  Future<void> _lockDeviceForLocalTest() async {
+    if (_isLocalLocking) return;
+    setState(() => _isLocalLocking = true);
+
+    try {
+      final adminEnabled = await DeviceControlService.instance
+          .requestDeviceAdmin();
+      if (!mounted) return;
+
+      if (!adminEnabled) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Enable Device Admin in the system prompt to lock.'),
+          ),
+        );
+        return;
+      }
+
+      final locked = await DeviceControlService.instance.applyServerProfile(
+        DeviceControlService.instance.profile.copyWith(isLocked: true),
+      );
+      if (!locked && mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Device lock failed.')));
+      }
+    } finally {
+      if (mounted) setState(() => _isLocalLocking = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -274,6 +308,27 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const SizedBox(height: 24),
           _buildLoginButton(),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: _isLocalLocking ? null : _lockDeviceForLocalTest,
+              icon: const Icon(Icons.lock),
+              label: Text(
+                _isLocalLocking
+                    ? 'WAITING FOR DEVICE ADMIN'
+                    : 'LOCK DEVICE (LOCAL TEST)',
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red.shade700,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
